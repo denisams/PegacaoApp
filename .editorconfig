@@ -1,0 +1,10 @@
+[*.{cs,vb}]
+dotnet_naming_rule.private_members_with_undercore.symbols = private_fields
+dotnet_naming_rule.private_members_with_undercore.style = prefix_undercore
+dotnet_naming_rule.private_members_with_undercore.severity = suggestion
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.prefix_undercore.captalization = camel_case
+dotnet_naming_style.prefix_undercore.required_prefix = _
