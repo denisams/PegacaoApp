@@ -1,0 +1,15 @@
+<h4>Internal Server Error - Atualizando a página o erro vai sumir</h4>
+<ng-container *ngIf="error">
+    <h5 class="text-danger"> Error: {{error.message}}</h5>
+    <p class="font-weigth-bold">Nota: Se você está vendo este erro, Não se preocupe</p>
+    <p>Qual é o próximo passo?</p>
+    <ol>
+        <li>Abra o inspecionador de elementos para ver o que quebrou</li>
+        <li>Veja se está no link certo</li>
+        <li>Tente reproduzir o erro no Postman pra ver se o erro é no front ou no back</li>
+    </ol>
+    <p style="font-weight: bold">Veja o stack trace pra ver o que tá rolando</p>
+    <code class="mt-5" style="background-color: whitesmoke;">
+        {{error.details}}
+    </code>
+</ng-container>
