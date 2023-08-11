@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '_models/user';
 
 
 import { BehaviorSubject, map } from 'rxjs';
+import { User } from '../_models/user';
 
 
 @Injectable({
