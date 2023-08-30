@@ -21,7 +21,7 @@
 
         <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
           <img src="{{user.photoUrl || './assets/user.png'}}" alt="Foto do usuário">
-            <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Bem vindo {{user.username | titlecase}}</a>
+            <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Bem vindo {{user.knownAs}}</a>
             <div class="dropdown-menu" *dropdownMenu>
                 <a class="dropdown-item" routerLink="/member/edit">Editar Perfil</a>
                 <a class="dropdown-item" (click)="logout()">Logout</a>
