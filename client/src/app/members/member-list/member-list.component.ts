@@ -4,6 +4,8 @@ import { MembersService } from 'src/app/_services/members.service';
 import { Observable } from 'rxjs';
 import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
+import { AccountService } from 'src/app/_services/account.service';
+import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 
 @Component({
@@ -16,7 +18,7 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
   userParams: UserParams;
   user: User;
-  genderList = [{ value: 'male', display: 'Homens' }, { value: 'female', display: 'Mulheres' }];
+  genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }];
 
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();

@@ -7,7 +7,7 @@
                 (click)="setMainPhoto(photo)"
                 [ngClass]='photo.isMain ? "btn-success active" : "btn-outline-success"'
                 class="btn btn-sm flex-grow-1"
-            >Main</button>
+            >Principal</button>
             <button 
                 [disabled]="photo.isMain"
                 (click)="deletePhoto(photo.id)"
@@ -21,7 +21,7 @@
  
     <div class="col-md-3">
 
-        <h3>Add Photos</h3>
+        <h3>Adicionar fotos</h3>
 
         <div ng2FileDrop
              [ngClass]="{'nv-file-over': hasBaseDropzoneOver}"
@@ -29,26 +29,26 @@
              [uploader]="uploader"
              class="card bg-faded p-3 text-center mb-3 my-drop-zone">
              <i class="fa fa-upload fa-3x"></i>
-            Drop photos here
+            Solte as fotos aqui
         </div>
 
-        Multiple
+        Várias
         <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
 
-        Single
+        Umas só
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
     <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
 
-        <h3>Upload queue</h3>
-        <p>Queue length: {{ uploader?.queue?.length }}</p>
+        <h3>Fila de upload</h3>
+        <p>Tamanho da fila: {{ uploader?.queue?.length }}</p>
 
         <table class="table">
             <thead>
             <tr>
-                <th width="50%">Name</th>
-                <th>Size</th>
+                <th width="50%">Nome</th>
+                <th>Tamanho</th>
             </tr>
             </thead>
             <tbody>
@@ -61,22 +61,22 @@
 
         <div>
             <div>
-                Queue progress:
+                Progresso da Fila:
                 <div class="progress" style="">
                     <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                 </div>
             </div>
             <button type="button" class="btn btn-success btn-s"
                     (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                <span class="fa fa-upload"></span> Upload all
+                <span class="fa fa-upload"></span> Upload de todas
             </button>
             <button type="button" class="btn btn-warning btn-s"
                     (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                <span class="fa fa-ban"></span> Cancel all
+                <span class="fa fa-ban"></span> Cancelar Tudo
             </button>
             <button type="button" class="btn btn-danger btn-s"
                     (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                <span class="fa fa-trash"></span> Remove all
+                <span class="fa fa-trash"></span> Remover Tudo
             </button>
         </div>
 

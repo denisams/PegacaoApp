@@ -5,7 +5,7 @@
         [scrollTop]="scrollMe.scrollHeight"
     >
         <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
-            Sem mensagens ainda... Diga oi para alguem e começe um papo
+            Sem Mensagens ainda... Diga um alô pra alguém ara poder se divertir
         </div>
 
         <ul 
@@ -20,14 +20,14 @@
                     <div class="chat-body">
                         <div class="header">
                             <small class="text-muted">
-                                <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                                <span class="fa fa-clock-o"> {{message.messageSent | timeago}}</span>
                                 <span class="text-danger" *ngIf="!message.dateRead 
                                     && message.senderUsername !== username">
-                                    (unread)
+                                    (Não Lida)
                                 </span>
                                 <span class="text-success" *ngIf="message.dateRead 
                                     && message.senderUsername !== username">
-                                    (read {{message.dateRead | timeago}})
+                                    (Lida {{message.dateRead | timeago}})
                                 </span>
                             </small>
                         </div>

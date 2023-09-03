@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { MemberEditComponent } from '../members/member-edit/member-edit.component';
 import { ConfirmService } from '../_services/confirm.service';
 
-
 @Injectable({
   providedIn: 'root'
 })

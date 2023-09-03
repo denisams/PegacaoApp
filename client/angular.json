@@ -81,12 +81,8 @@
           "configurations": {
             "production": {
               "browserTarget": "client:build:production"
-            },
-            "development": {
-              "browserTarget": "client:build:development"
             }
-          },
-          "defaultConfiguration": ""
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -142,5 +138,4 @@
       }
     }
   }
-  
 }

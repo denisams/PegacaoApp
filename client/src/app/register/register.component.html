@@ -1,32 +1,32 @@
 <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off">
-    <h2 class="text-center text-primary">Cadastrar</h2>
+    <h2 class="text-center text-primary">Cadastre-se</h2>
     <hr>
 
     <div class="mb-3">
         <label style="margin-right: 10px;">Eu sou: </label>
         <label class="form-check-label">
-            <input class="form-check-input" type="radio" value='male' formControlName='gender'> Homem
+            <input class="form-check-input" type="radio" value='male' formControlName='gender'> Male
         </label>
         <label class="form-check-label">
-            <input type="radio" value='female' formControlName='gender' class="form-check-input ms-3"> Mulher
+            <input type="radio" value='female' formControlName='gender' class="form-check-input ms-3"> Female
         </label>
     </div>
 
     <app-text-input [formControl]='registerForm.controls["username"]' 
-        [label]='"Usuário"'></app-text-input>
+        [label]='"Username"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["knownAs"]' 
-        [label]='"Apelido"'></app-text-input>
+        [label]='"Known As"'></app-text-input>
     <app-date-input [formControl]='registerForm.controls["dateOfBirth"]' 
-        [label]='"Aniversário"' [maxDate]='maxDate'></app-date-input>
+        [label]='"Date Of Birth"' [maxDate]='maxDate'></app-date-input>
     <app-text-input [formControl]='registerForm.controls["city"]' 
-        [label]='"Cidate"'></app-text-input>
+        [label]='"City"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["country"]' 
-        [label]='"País"'></app-text-input>
+        [label]='"Country"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["password"]' 
-        [label]='"Senha"' [type]='"password"'>
+        [label]='"Password"' [type]='"password"'>
     </app-text-input>
     <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
-        [label]='"Confirme a senha"'
+        [label]='"Confirm Password"'
         [type]='"password"'></app-text-input>
 
     <div class="row" *ngIf="validationErrors.length > 0">
@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-group text-center">
-        <button [disabled]='!registerForm.valid' class="btn btn-success mr-2" type="submit">Registrar</button>
+        <button [disabled]='!registerForm.valid' class="btn btn-success mr-2" type="submit">Salvar</button>
         <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancelar</button>
     </div>
 </form>
