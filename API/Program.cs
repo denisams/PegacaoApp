@@ -1,33 +1,45 @@
-using API.Data;
+
 using API.Extentions;
-using API.Middleware;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddControllers();
+builder.Services.AddCors();
 builder.Services.AddIdentityServices(builder.Configuration);
-           
+builder.Services.AddSignalR();           
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("https://localhost:4200/"));
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
+app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
+app.MapFallbackToController("Index", "Fallback");
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
+    await Seed.SeedUsers(userManager, roleManager);
 }
 catch (Exception ex)
 {
@@ -35,4 +47,4 @@ catch (Exception ex)
     logger.LogError(ex, "Um Erro aconteceu durante a migracao");
 }
 
-app.Run();
+await app.RunAsync();

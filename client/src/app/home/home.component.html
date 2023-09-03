@@ -1,17 +1,17 @@
 <div class="container mt-5">
-    <div *ngIf='!registerMode' style="text-align: center;">
-        <h1>Encontre o seu pé de meia</h1>
-        <p class="lead">Veja aqui a tampa da sua panela... Faça apenas seu cadastro</p>
+    <div *ngIf="!registerMode" style='text-align: center;'>
+        <h1>Encontre a tampa da sua panela</h1>
+        <p class="lead">Venha encontrar aquela parceria que precisa... Tudo que precisa é se cadastrar!</p>
         <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Registrar</button>
-            <button class="btn btn-primary btn-info btn-lg">Veja mais</button>
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Registro</button>
+            <button class="btn btn-info btn-lg">Leia Mais</button>
         </div>
     </div>
 
     <div *ngIf="registerMode" class="container">
         <div class="row justify-content-center">
             <div class="col-4">
-                <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+                <app-register (cancelRegister)="cancelRegisterMode($event)" ></app-register>
             </div>
         </div>
     </div>

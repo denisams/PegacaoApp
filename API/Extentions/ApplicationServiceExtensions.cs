@@ -2,6 +2,7 @@ using API.Data;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
+using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extentions
@@ -14,14 +15,22 @@ namespace API.Extentions
         {
             opt.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
         });
-        services.AddCors();
-        services.AddScoped<ITokenService, TokenServices>();
+        
+        services.AddSingleton<PresenceTracker>();
+        services.AddScoped<ITokenService, TokenService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.Configure<CloudnarySettings>(configuration.GetSection("CloudinarySettings"));
         services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<LogUserActivity>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ILikesRepository, LikesRepository>();
+        services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<LogUserActivity>();
+        services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+
+
 
         return services;
         }

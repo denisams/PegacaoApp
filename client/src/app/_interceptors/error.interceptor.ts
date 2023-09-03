@@ -3,12 +3,12 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse
+  HttpInterceptor
 } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
-import { NavigationExtras, Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { Router, NavigationExtras } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -17,41 +17,42 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error){
-          switch(error.status) {
+      catchError(error => {
+        if (error) {
+          switch (error.status) {
             case 400:
-              if(error.error.errors){
-                const modelStateErrors = [];
-                for (const key in error.error.errors){
-                  if(error.error.errors[key]){
-                    modelStateErrors.push(error.error.errors[key])
+              if (error.error.errors) {
+                const modalStateErrors = [];
+                for (const key in error.error.errors) {
+                  if (error.error.errors[key]) {
+                    modalStateErrors.push(error.error.errors[key])
                   }
                 }
-                throw modelStateErrors.flat();
-              }
-              else {
-                this.toastr.error(error.error.errors, error.status.toString())
+                throw modalStateErrors.flat();
+              } else if (typeof(error.error) === 'object') {
+                this.toastr.error(error.statusText, error.status);
+              } else {
+                this.toastr.error(error.error, error.status);
               }
               break;
             case 401:
-              this.toastr.error("Não autorizado Mané!!!", error.status.toString())
+              this.toastr.error(error.statusText, error.status);
               break;
             case 404:
               this.router.navigateByUrl('/not-found');
               break;
             case 500:
-              const navigationExtras: NavigationExtras = {state: {error: error.error}};
+              const navigationExtras: NavigationExtras = {state: {error: error.error}}
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this.toastr.error('Aconteceu um erro inesperado..');
+              this.toastr.error('Something unexpected went wrong');
               console.log(error);
               break;
           }
         }
-        throw error;
+        return throwError(error);
       })
-    );
+    )
   }
 }
