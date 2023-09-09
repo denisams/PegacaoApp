@@ -1,11 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using API.DTOs;
-using API.Entities;
-using API.Extensions;
-using API.Interfaces;
-using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 
 namespace API.SignalR
@@ -54,12 +46,12 @@ namespace API.SignalR
             var username = Context.User.GetUsername();
 
             if (username == createMessageDto.RecipientUsername.ToLower())
-                throw new HubException("You cannot send messages to yourself");
+                throw new HubException("Você não pode enviar mensagem para você mesmo");
 
             var sender = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
             var recipient = await _unitOfWork.UserRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
 
-            if (recipient == null) throw new HubException("Not found user");
+            if (recipient == null) throw new HubException("Usuário não encontrado");
 
             var message = new Message
             {

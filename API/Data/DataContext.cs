@@ -1,8 +1,5 @@
-using System;
-using API.Entities;
-using Microsoft.AspNetCore.Identity;
+using System.Text.Json;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -22,7 +19,7 @@ namespace API.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override async void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
@@ -71,8 +68,8 @@ namespace API.Data
 
             builder.ApplyUtcDateTimeConverter();
         }
-    }
 
+    }
     public static class UtcDateAnnotation
     {
         private const String IsUtcAnnotation = "IsUtc";

@@ -1,13 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using API.DTOs;
-using API.Entities;
-using API.Extensions;
 using API.Helpers;
-using API.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -55,7 +46,7 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete()) return Ok();
 
-            return BadRequest("Problem deleting the message");
+            return BadRequest("Aconteceu um erro a apagar a mensagem");
         }
     }
 }
