@@ -1,7 +1,3 @@
-using System.Threading.Tasks;
-using API.Interfaces;
-using AutoMapper;
-
 namespace API.Data
 {
     public class UnitOfWork : IUnitOfWork
